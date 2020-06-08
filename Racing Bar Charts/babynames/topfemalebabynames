@@ -42,15 +42,29 @@ babynameCleaning <- function(strname) {
   t(as.matrix.data.frame(filter(girls, name == strname, n) %>%
   select(year, name, n)))
 }
-bigdata <- c()
+bigdata <- list()
+i <- 1
 for (girl in topfemalenames) {
-  y <- (babynameCleaning(girl))
+  y <- babynameCleaning(girl)
   assign(paste0(girl), babynameCleaning(girl))
-  append(bigdata, y)
+  if (dim(y)[2] < 99)
+    for (i in 1:dim(y)[2]) {
+      if (isTRUE(as.numeric(y[3,][i+1]) != as.numeric(y[3,][i]) + 1)) # index to get the row with counts n
+        y <- as.data.frame(y)
+        add_column(y, d = c(as.character(as.numeric(y[1,][i]) + 1), girl, 0), .after = i)
+        y
+        # y[as.character(as.numeric(year) + 1)] = c(as.character(as.numeric(year) + 1), 0)
+      }
+  y <- y[c(3),] # get the whole row by putting comma after index num
+  # y
+  # girl
+  bigdata[[i]] <- y
+  i <- i + 1
 }
 bigdata
-namesValues <- do.call("rbind", list(bigdata))
-namesValues
+namesValues <- do.call("rbind", bigdata)
+# add first row of names and first col of years
+# namesValues
 ```
 
 
