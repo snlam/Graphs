@@ -1,0 +1,144 @@
+---
+title: "babynameCleaning"
+author: "Shanni"
+date: "6/8/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(babynames)
+library(tidyverse)
+```
+
+Unique Top Female Names:
+```{r}
+topfemalenames <- c("Abigail","Alexis","Amanda","Amy","Angela","Ashley","Ava","Barbara","Betty","Brittany","Carol","Deborah", "Debra","Donna","Dorothy","Emily","Emma","Hannah","Heather","Helen","Isabella", "Jennifer","Jessica","Joan","Judith","Karen","Kimberly","Linda","Lisa","Madison","Margaret","Mary", "Melissa","Michelle","Olivia","Patricia","Ruth","Samantha","Sandra","Sarah","Shirley","Sophia", "Susan")
+```
+
+```{r}
+girls <- filter(babynames, sex == "F" & year %in% 1919:2017)
+```
+
+```{r}
+capitalize <- function(char) {
+  paste0(toupper(substr(char, 1, 1)), substr(char, 2, nchar(char)))
+}
+```
+
+NEED TO FILL EMPTY YEARS WITH 0
+NEED TO ASSIGN BUT ALSO GET PHYSICAL DATA ITSELF TO COMBINE INTO BIGDATA
+
+Transpose each of the names; then, combine all their values rowwise to form one big table.
+```{r}
+babynameCleaning <- function(strname) {
+  # View(t(as.matrix.data.frame(filter(girls, name == strname, n) %>%
+  # select(year, name, n))))
+  t(as.matrix.data.frame(filter(girls, name == strname, n) %>%
+  select(year, name, n)))
+}
+bigdata <- c()
+for (girl in topfemalenames) {
+  y <- (babynameCleaning(girl))
+  assign(paste0(girl), babynameCleaning(girl))
+  append(bigdata, y)
+}
+bigdata
+namesValues <- do.call("rbind", list(bigdata))
+namesValues
+```
+
+
+```{r}
+abigail <- filter(girls, name == "Abigail")
+abigail <- select(abigail, year, name, n)
+alexis <- filter(girls, name == "Alexis")
+alexis <- select(alexis, year, name, n)
+amanda <- filter(girls, name == "Amanda")
+amanda <- select(amanda, year, name, n)
+amy <- filter(girls, name == "Amy")
+amy <- select(amy, year, name, n)
+angela <- filter(girls, name == "Angela")
+angela <- select(angela, year, name, n)
+ashley <- filter(girls, name == "Ashley")
+ashley <- select(ashley, year, name, n)
+ava <- filter(girls, name == "Ava")
+ava <- select(ava, year, name, n)
+barbara <- filter(girls, name == "Barbara")
+barbara <- select(barbara, year, name, n)
+betty <- filter(girls, name == "Betty")
+betty<- select(betty, year, name, n)
+brittany <- filter(girls, name == "Brittany")
+brittany <- select(brittany, year, name, n)
+carol <- filter(girls, name == "Carol")
+carol <- select(carol, year, name, n)
+deborah <- filter(girls, name == "Deborah")
+deborah <- select(deborah, year, name, n)
+debra <- filter(girls, name == "Debra")
+debra <- select(debra, year, name, n)
+donna <- filter(girls, name == "Donna")
+donna <- select(donna, year, name, n)
+dorothy <- filter(girls, name == "Dorothy")
+dorothy <- select(dorothy, year, name, n)
+emily <- filter(girls, name == "Emily")
+emily <- select(emily, year, name, n)
+emma <- filter(girls, name == "Emma")
+emma <- select(emma, year, name, n)
+hannah <- filter(girls, name == "Hannah")
+hannah <- select(hannah, year, name, n)
+heather <- filter(girls, name == "Heather")
+heather <- select(heather, year, name, n)
+helen <- filter(girls, name == "Helen")
+helen <- select(helen, year, name, n)
+isabella <- filter(girls, name == "Isabella")
+isabella <- select(isabella, year, name, n)
+jennifer <- filter(girls, name == "Jennifer")
+jennifer <- select(jennifer, year, name, n)
+jessica <- filter(girls, name == "Jessica")
+jessica <- select(jessica, year, name, n)
+joan <- filter(girls, name == "Joan")
+joan <- select(joan, year, name, n)
+judith <- filter(girls, name == "Judith")
+judith <- select(judith, year, name, n)
+karen <- filter(girls, name == "Karen")
+karen <- select(karen, year, name, n)
+kimberly <- filter(girls, name == "Kimberly")
+kimberly <- select(kimberly, year, name, n)
+linda <- filter(girls, name == "Linda")
+linda <- select(linda, year, name, n)
+lisa <- filter(girls, name == "Lisa")
+lisa <- select(lisa, year, name, n)
+madison <- filter(girls, name == "Madison")
+madison <- select(madison, year, name, n)
+margaret <- filter(girls, name == "Margaret")
+margaret <- select(margaret, year, name, n)
+mary <- filter(girls, name == "Mary")
+mary <- select(mary, year, name, n)
+melissa <- filter(girls, name == "Melissa")
+melissa <- select(melissa, year, name, n)
+michelle <- filter(girls, name == "Michelle")
+michelle <- select(michelle, year, name, n)
+olivia <- filter(girls, name == "Olivia")
+olivia <- select(olivia, year, name, n)
+patricia <- filter(girls, name == "Patricia")
+patricia <- select(patricia, year, name, n)
+ruth <- filter(girls, name == "Ruth")
+ruth <- select(ruth, year, name, n)
+samantha <- filter(girls, name == "Samantha")
+samantha <- select(samantha, year, name, n)
+sandra <- filter(girls, name == "Sandra")
+sandra <- select(sandra, year, name, n)
+sarah <- filter(girls, name == "Sarah")
+sarah <- select(sarah, year, name, n)
+shirley <- filter(girls, name == "Shirley")
+shirley <- select(shirley, year, name, n)
+sophia <- filter(girls, name == "Sophia")
+sophia <- select(sophia, year, name, n)
+susan <- filter(girls, name == "Susan")
+susan <- select(susan, year, name, n)
+```
