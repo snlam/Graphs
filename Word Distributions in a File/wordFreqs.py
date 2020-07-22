@@ -1,13 +1,7 @@
 # for timing our program
 import timeit
 
-# for sentiment analysis
-from nltk.corpus import stopwords
 from textblob import TextBlob
-
-# for mathy operations
-import math 
-import numpy as np
 
 # for making plots
 import matplotlib.pyplot as plt
